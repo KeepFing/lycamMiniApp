@@ -1,0 +1,239 @@
+<view style='background: #fff;'>
+<view class='ding'>
+  <view>
+    <icon class="searchcion" size='20' type='search'></icon>
+    <input class='search-box' placeholder-class="input-placeholder" disabled='disabled' placeholder='搜索我感兴趣的内容' type='text' bindtap='search'>
+    </input>
+  </view>
+</view>
+
+  <scroll-view scroll-x="true" class="tab-h" scroll-left="0">
+        <view wx:for="{{navbar}}" wx:key="{{index}}" data-idx="{{index}}" data-name="{{item}}" class="tab-item {{currentTab==index ? 'active' : ''}}" bindtap="navbarTap">{{item}}</view>
+    </scroll-view>
+</view>
+
+
+<view style='width:100%;height:30px;margin-top:70px;background: #fff;'></view>
+<view hidden="{{currentTab!==0}}" class='behind-space'>
+  <swiper style='display:block;height:150px;' indicator-dots="{{indicatorDots}}" circular="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="{{id}}">
+      <swiper-item>
+        <image src="{{item.picUrl}}" class="slide-image" width="375rpx" height="150px" data-isSeries="{{item.isSeries}}" data-streamId="{{item.streamId}}" bindtap='courseDetaile' />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!--the first models-->
+
+  <view class='jingxuan text-center'>
+    <view class='wa-row'>
+      <view class='wa-col-40'></view>
+      <view class='wa-col-5'>
+        <image src='../../image/point.png' class='point-img'></image>
+      </view>
+      <view class='wa-col-10'>精选</view>
+      <view class='wa-col-5'>
+        <image src='../../image/point.png' class='point-img'></image>
+      </view>
+      <view class='wa-col-40'></view>
+    </view>
+  </view>
+  <view>
+    <view class="wa-grid">
+      <view wx:for="{{jingxun}}" wx:for-item="item" wx:key="{{id}}" data-isSeries="{{item.isSeries}}" data-streamId="{{item.streamId}}" class="course wa-grid-50" bindtap='courseDetaile'>
+        <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+        <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+        <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+        <text wx:else class='status_reload'>回放</text>
+        <image style="width: 355rpx; height: 100px; margin:0px 10rpx;border:1px solid #F2F2F2;" mode="{{mode}}" src="{{item.thumbnailUrl}}"></image>
+
+        <view class="wa-row" style='padding:0px 5px;'>
+          <view wx:if="{{item.isSeries}}" class="wa-col-25 type">系列课</view>
+          <view wx:else></view>
+          <view class="wa-col-75 titel">{{item.title}}</view>
+        </view>
+
+        <view class="wa-row" style='padding:10px 5px;color:#D0D0D0;'>
+            <view class='wa-col-15 person'>
+              <image class='mini-head-image' src='{{item.user.avatarUrl}}'></image>
+            </view>
+            <view class='wa-col-50 person'>{{item.user.displayName}}</view>
+            <view class='wa-col-15'>
+              <image class='mini-eye-image' src='../../image/icon_home_eye@2x.png'></image>
+            </view>
+            <view class='wa-col-20 person'>{{item.watchedCount}}</view>
+          </view>
+
+      </view>
+    </view>
+
+    <view class='jingxuan text-center' bindtap='morechioce'>
+      <text class='more-text'>更多精彩</text>
+      <image class='more-img' src='../../image/more.png'></image>
+    </view>
+
+    <view style='width:100%; height:15px; background-color: #f7f7fa'>
+      <text></text>
+    </view>
+
+    <!--下一个模块-->
+
+
+    <view class='jingxuan text-center'>
+      <view class='wa-row'>
+      <view class='wa-col-40'></view>
+      <view class='wa-col-5'>
+        <image src='../../image/point.png' class='point-img'></image>
+      </view>
+      <view class='wa-col-10'>活动</view>
+      <view class='wa-col-5'>
+        <image src='../../image/point.png' class='point-img'></image>
+      </view>
+      <view class='wa-col-40'></view>
+    </view>
+    </view>
+
+
+    <view>
+      <view class="wa-grid">
+        <view wx:for="{{active}}" wx:for-item="item" data-streamId="{{item.streamId}}" data-isSeries="{{item.isSeries}}" wx:key="{{id}}" class="course wa-grid-50" bindtap='courseDetaile'>
+          <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+          <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+          <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+          <text wx:else class='status_reload'>回放</text>
+          <image style="width: 355rpx; height: 100px; margin:0px 10rpx;border:1px solid #F2F2F2;" mode="{{mode}}" src="{{item.thumbnailUrl}}"></image>
+
+          <view class="wa-row" style='padding:0px 5px;'>
+            <view wx:if="{{item.isSeries}}" class="wa-col-25 type">系列课</view>
+            <view wx:else></view>
+            <view class="wa-col-75 titel">{{item.title}}</view>
+          </view>
+
+          <view class="wa-row" style='padding:10px 5px;color:#D0D0D0;'>
+            <view class='wa-col-15 person'>
+              <image class='mini-head-image' src='{{item.user.avatarUrl}}'></image>
+            </view>
+            <view class='wa-col-50 person'>{{item.user.displayName}}</view>
+            <view class='wa-col-15'>
+              <image class='mini-eye-image' src='../../image/icon_home_eye@2x.png'></image>
+            </view>
+            <view class='wa-col-20 person'>{{item.watchedCount}}</view>
+          </view>
+
+
+        </view>
+      </view>
+    </view>
+
+    <view class='jingxuan text-center' bindtap='moreactive'>
+      <text class='more-text'>更多精彩</text>
+      <image class='more-img' src='../../image/more.png'></image>
+    </view>
+
+
+    <view style='width:100%; height:15px; background-color: #f7f7fa'>
+      <text></text>
+    </view>
+
+    <view class='jingxuan text-center'>
+      <view class='wa-row'>
+        <view class='wa-col-35'></view>
+        <view class='wa-col-5'>
+          <image src='../../image/point.png' class='point-img'></image>
+        </view>
+        <view class='wa-col-20'>大家都在看</view>
+        <view class='wa-col-5'>
+          <image src='../../image/point.png' class='point-img'></image>
+        </view>
+        <view class='wa-col-35'></view>
+      </view>
+    </view>
+
+    <!-- <view class="wa-item wa-item-thumbnail-left" wx:for="{{streams}}" wx:for-item="item" wx:key="{{id}}" data-streamId="{{item.streamId}}" wx:key="{{id}}" bindtap='courseDetaile'>
+        
+      <text class="icon-right ion-chevron-right"></text>
+      <image class="item-img" src="{{item.thumbnailUrl}}"></image>
+      <view>
+        <view class="wa-row" style='padding:0px 10px;'>
+          <view wx:if="{{item.isSeries}}" class="wa-col-25 type">系列课</view>
+          <view wx:else></view>
+          <view class="wa-col-75 titel">{{item.title}}</view>
+        </view>
+      </view>
+      <view>
+        <view class="wa-row" style='padding:10px 5px;color:#D0D0D0;'>
+          <image class='wa-col-10 head-img' src='{{item.user.avatarUrl}}'></image>
+          <text class='wa-col-50'>{{item.user.displayName}}</text>
+          <image class='wa-col-10 eye-img' src='../../image/eye.png'></image>
+          <text class='wa-col-33'>{{item.watchedCount}}</text>
+        </view>
+      </view>
+    </view> -->
+    <view class='wa-row' wx:for="{{streams}}" wx:for-item="item" wx:key="{{item.id}}" data-isSeries="{{item.isSeries}}" data-streamId="{{item.streamId}}" bindtap='courseDetaile'>
+      <view class='wa-col-33'>
+        <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+        <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+        <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+        <text wx:else class='status_reload'>回放</text>
+        <image class='mini-img' src='{{item.thumbnailUrl}}'></image>
+      </view>
+      <view class='wa-col-66'>
+        <view class='wa-row title-hid'>
+          <view wx:if="{{item.isSeries}}" class="sub-type">系列课</view>
+          <view wx:else></view>
+          <view class='title-eclipce'>{{item.title}}</view>
+        </view>
+        <view class='wa-row sub-des'>
+          <view class='wa-col-10 person'>
+            <image class='mini-head-image' src='{{item.user.avatarUrl}}'></image>
+          </view>
+          <view class='wa-col-50 person'>{{item.user.displayName}}</view>
+          <view class='wa-col-5'>
+            <image class='mini-eye-image' src='../../image/icon_home_eye@2x.png'></image>
+          </view>
+          <view class='wa-col-30 person'>{{item.watchedCount}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{nextPageAvailable == true}}" class='more' bindtap='getMoreData'>————加载更多————</view>
+    <view wx:else class='not-more'>————没有更多内容—————</view>
+  </view>
+</view>
+
+
+<view hidden="{{currentTab!==index}}" wx:for="{{navbar}}" wx:key="{{index}}" class='behind-space'>
+
+  <view class="wa-grid">
+    <view wx:for="{{dataList}}" wx:for-item="item" data-streamId="{{item.streamId}}" data-isSeries="{{item.isSeries}}" wx:key="{{id}}" class="course wa-grid-50" bindtap='courseDetaile'>
+      <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+      <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+      <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+      <text wx:else class='status_reload'>回放</text>
+      <image style="width: 355rpx; height: 100px; margin:0px 10rpx;border:1px solid #F2F2F2;" mode="{{mode}}" src="{{item.thumbnailUrl}}"></image>
+
+      <view class="wa-row" style='padding:0px 5px;'>
+        <view wx:if="{{item.isSeries}}" class="wa-col-25 type">系列课</view>
+        <view wx:else></view>
+        <view class="wa-col-75 titel">{{item.title}}</view>
+      </view>
+
+      <view class="wa-row" style='padding:10px 5px;color:#D0D0D0;'>
+            <view class='wa-col-15 person'>
+              <image class='mini-head-image' src='{{item.user.avatarUrl}}'></image>
+            </view>
+            <view class='wa-col-50 person'>{{item.user.displayName}}</view>
+            <view class='wa-col-15'>
+              <image class='mini-eye-image' src='../../image/icon_home_eye@2x.png'></image>
+            </view>
+            <view class='wa-col-20 person'>{{item.watchedCount}}</view>
+          </view>
+
+    </view>
+  </view>
+  <view wx:if="{{navbar[index] == '热门'}}"></view>
+  <view wx:else>
+    <view wx:if="{{nextPageAvailable == true}}" data-category="{{navbar[index]}}" class='more' bindtap='getMoreDataOfCategory'>————加载更多————</view>
+    <view wx:else class='not-more'>————没有更多内容—————</view>
+  </view>
+
+</view>

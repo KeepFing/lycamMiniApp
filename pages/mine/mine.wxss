@@ -1,0 +1,9 @@
+/* pages/mine/mine.wxss */
+@import '../../weui.wxss';
+page{
+  background:rgba(244,244,244,1);
+  
+}
+.weui-cell{
+  height: 46px;
+}

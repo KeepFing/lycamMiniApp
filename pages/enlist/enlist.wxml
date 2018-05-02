@@ -1,0 +1,10 @@
+<!--pages/enlist/enlist.wxml-->
+<view class='wa-grid'>
+  <view class='wa-grid-25 head-name' wx:for="{{userList}}" wx:for-item="item" wx:key="{{index}}">
+    <image class='head-image' src='{{item.avatarUrl}}'></image>
+    <view class='username'>
+      <text>{{item.displayName}}</text>
+    </view>
+    
+  </view>
+</view>

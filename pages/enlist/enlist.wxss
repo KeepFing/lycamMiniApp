@@ -1,0 +1,18 @@
+/* pages/enlist/enlist.wxss */
+.head-name{
+  height: 250rpx;
+  text-align: center;
+  padding: 0 15rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+.head-image{
+  width: 100%;
+  height: 150rpx;
+  border-radius: 50%;
+}
+.username{
+  height: 30rpx;
+  margin: 15rpx;
+}

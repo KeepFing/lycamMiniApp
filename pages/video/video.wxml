@@ -1,0 +1,155 @@
+<import src="../../pages/wxParse/wxParse.wxml" />
+<!--pages/video/video.wxml-->
+<view>
+  <view class="section tc">
+    <image src='{{courseData.thumbnailUrl}}' style='width: 750rpx; height: 225px;'></image>
+    <!-- <video class='video' src="{{courseData.streamUrl}}" controls></video> -->
+    <!-- <live-player src="rtmp://rtmp-push-aws.ws.lycam.tv/lycam?token=5hX2P8yo4Pwq1alQNJNIlcE1jng15FsV2h6tAG31d5I17AeyMbEd4W90TRCtwbfr" mode="live" autoplay bindstatechange="statechange" binderror="error" style="width: 750rpx; height: 225px;" />  -->
+    <!-- <live-player
+      id="player"
+      src="http://resource-s3.lycam.tv/apps/XPQKR06444/8b29d130-fa75-11e6-ba8a-a3de0ac619fb/streams/6d9f60d0-1b08-11e8-9e36-530147dd70ae/hls/vod.m3u8"
+      mode="live"
+      bindstatechange="statechange"
+      style="width: 750rpx; height: 225px;" /> -->
+  </view>
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+  <view class='min-space' style='margin-top:5px'></view>
+
+  <view hidden="{{currentTab!==1}}">
+    <view class='course-title'>
+      <view class='wa-row'>
+        <view class='wa-col-75'>
+          <text>{{courseData.title}}</text>
+        </view>
+        <!-- <view class='wa-col-75'>
+          <text class='submit-name'>立即报名</text>
+        </view> -->
+      </view>
+      <view class='hr'></view>
+      <view class='wa-row'>
+        <view class='wa-col-33 text-center'>
+          <view>课时</view>
+          <view class='text-derection'>{{catalog.length}}节</view>
+        </view>
+        <view class='wa-col-33 text-center'>
+          <view>分类</view>
+          <view class='text-derection'>{{courseData.category}}</view>
+        </view>
+        <view class='wa-col-33 text-center' data-id='{{courseData.streamId}}' bindtap='handsubmit'>
+          <view>报名人数</view>
+          <view class='text-derection'>{{courseData.subscribeCount}}</view>
+        </view>
+      </view>
+
+
+    </view>
+
+
+    <view class='min-space' style='margin-top:5px'></view>
+    <view style='margin:20px 10px;'>课程描述：</view>
+    <view style='margin:0px 0px;'>
+      <template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+      <!-- {{courseData.description}} -->
+    </view>
+
+    <!-- <view class='wa-row'>
+      <view class='wa-col-33'>
+        <view class='hr'></view>
+      </view>
+      <view class='wa-col-33 text-center'>相关推荐</view>
+      <view class='wa-col-33'>
+        <view class='hr'></view>
+      </view>
+    </view> -->
+
+
+    
+  </view>
+  <view wx:if="{{courseData.isSubscribe}}"></view>
+  <view wx:elif="{{!wxMiniPayStatus}}" class='wa-row'>
+      <button type='primary' class='test-button' bindtap='testPay'>
+        <text>报名</text>
+      </button>
+    </view>
+    <view class='pay' wx:else>
+    <view class='wa-row' wx:if="{{courseData.charge != 0}}">
+      <view>
+        <image class='icon-charge' src='../../image/iocn_bottom_money@2x.png'></image>
+      </view>
+      <text class='wa-col-55 price' decode="{{true}}">&nbsp;&nbsp;¥{{courseData.charge}}</text>
+      <button size='mini' type='primary' class='wa-col-25 pay-btn' data-item="{{item}}" bindtap='pay'>
+        <text class='confirm'>报名</text>
+      </button>
+    </view>
+
+    <view class='wa-row' wx:else>
+    <view>
+        <image class='icon-charge' src='../../image/iocn_bottom_charge@2x.png'></image>
+      </view>
+      <text class='wa-col-66 price' decode="{{true}}" style='color:#C6C8D1;'>&nbsp;&nbsp;本课程免费</text>
+      <button size='mini' type='primary' id='status' class='wa-col-25 pay-btn' data-streamId="WeChat" bindtap='freepay'>
+        <text class='confirm'>报名</text>
+      </button>
+    </view>
+  </view>
+</view>
+
+<!-- 评论区块 -->
+<view hidden="{{currentTab!==0}}">
+        <view class="weui-cells weui-cells_after-title" wx:for="{{catalog}}" wx:for-item="item" wx:key="{{streamId}}" data-streamId="{{item.streamId}}" data-parentid="{{courseData.streamId}}" data-parentPicUrl="{{courseData.thumbnailUrl}}" data-charge="{{courseData.charge}}" data-isseries='{{courseData.isSeries}}' data-issub='{{courseData.isSubscribe}}' bindtap='watchvideo' style='border:0rpx solid #F2F2F2'>
+            <view class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+                <view class="weui-cell__bd">
+                  <view class='cate-title'>{{index+1}}.{{item.title}}</view>
+                  <view class='wa-row sub-des'>
+                    <view class='wa-col-66'>时间:{{item.startTime}}</view>
+                    <view class='wa-col-33' style='color:#AEB2C6'>时长:{{item.duration}}</view>
+                  </view>
+                </view>
+                <!-- <view class="weui-cell__ft weui-cell__ft_in-access" wx:if="{{item.isSubscribe}}"></view> -->
+                <view class="weui-cell__ft weui-cell__ft_in-access">
+                  <view wx:if="{{item.status == 'over'}}">
+                    <view wx:if="{{item.isReplay}}">
+                      <image style='width:20px;height:20px;' src='../../image/icon_catalogue_play_pressed@2x.png'></image>
+                    </view>
+                    <view wx:else>
+                      <image style='width:20px;height:20px;' src='../../image/icon_catalogue_lockup.png'></image>
+                    </view>
+                  </view>
+                  <image wx:else style='width:20px;height:20px;' src='../../image/icon_catalogue_lockup.png'></image>
+                </view>
+            </view>
+        </view> 
+
+
+            <view class='b-space'></view>
+  <view wx:if="{{courseData.isSubscribe}}"></view>
+  <view wx:elif="{{!wxMiniPayStatus}}" class='wa-row'>
+      <button type='primary' class='test-button' bindtap='testPay'>
+        <text>报名</text>
+      </button>
+    </view>
+  <view class='pay' wx:else>
+    <view class='wa-row' wx:if="{{courseData.charge != 0}}">
+      <view>
+        <image class='icon-charge' src='../../image/iocn_bottom_money@2x.png'></image>
+      </view>
+      <text class='wa-col-55 price' decode="{{true}}">&nbsp;&nbsp;¥{{courseData.charge}}</text>
+      <button size='mini' type='primary' class='wa-col-25 pay-btn' data-id="{{courseData.streamId}}" bindtap='pay'>
+        <text class='confirm'>报名</text>
+      </button>
+    </view>
+
+    <view class='wa-row' wx:else>
+      <view>
+        <image class='icon-charge' src='../../image/iocn_bottom_charge@2x.png'></image>
+      </view>
+      <text class='wa-col-66 price' decode="{{true}}" style='color:#C6C8D1;'>&nbsp;&nbsp;本课程免费</text>
+      <button size='mini' type='primary' class='wa-col-25 pay-btn' data-id='{{courseData.streamId}}' bindtap='freepay'>
+        <text class='confirm'>报名</text>
+      </button>
+    </view>
+  </view>
+  <!-- <view class='min-space' style='margin-top:5px'></view> -->
+</view>

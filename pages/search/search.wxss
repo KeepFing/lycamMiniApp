@@ -1,0 +1,158 @@
+/* pages/search/search.wxss */
+page{
+  background-color: #F4F4F4;
+}
+.box {
+  display: flex;
+}
+.page_row{
+  background-color: #FAFAFF;
+  padding-bottom: 7px;
+}
+.search-box{
+  width:355px;
+  height:28px;
+  margin: 8px 5px; 
+  background:rgba(242,243,247,1);
+  border-radius: 15px ; 
+}
+
+.cancel {
+  width: 20%;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.history-record{
+  font-size: 14px;
+  padding: 15px;
+  float: left;
+}
+.remove-record{
+  font-size: 12px;
+  padding: 15px;
+  float: right;
+  color: green;
+}
+.clear{
+  clear: both;
+}
+.history-list{
+  width: 750rpx;
+  padding: 15px;
+  height: 30px;
+}
+.history-content{
+  float: left;
+  height: 20px;
+  color: gray;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid lavender;
+  border-radius: 15px;
+}
+.mini-img {
+  width: 100%;
+  height: 70px;
+}
+
+.title-hid {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub-des {
+  color: gainsboro;
+  font-size: 0.3em;
+  margin-top: 15px;
+}
+
+.status_loding {
+  padding: 0 10px;
+  margin: 0px 10px;
+  position: absolute;
+  color: white;
+  height: 20px;
+  font-weight: 200;
+  font-size: 0.8em;
+  line-height: 20px;
+  background-color: darkturquoise;
+}
+
+.status_reload {
+  padding: 0 10px;
+  margin: 0px 10px;
+  position: absolute;
+  color: white;
+  height: 20px;
+  font-weight: 200;
+  font-size: 0.8em;
+  line-height: 20px;
+  background-color: grey;
+}
+
+.box-border {
+  background-color: #FFFFFF;
+  margin: 1px 0px;
+  padding: 15px 0px 15px 10px;
+  border: 1px solid white;
+}
+
+.title-eclipce {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.type{
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 300;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #14C864;
+  color: #14C864;
+  margin-right: 5px;
+  padding: 0px 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+.search{  
+  width: 80%;  
+}  
+.search_arr {  
+  border: 1px solid #d0d0d0;  
+  border-radius: 15px;  
+  margin-left: 20rpx;  
+}  
+.search_arr input{  
+  margin-left: 60rpx;  
+  height: 60rpx;  
+  border-radius: 15px;  
+}  
+.page_row{  
+  display: flex;  
+  flex-direction: row  
+}  
+.searchcion {  
+  margin: 10rpx 10rpx 10rpx 10rpx;  
+  position: absolute;  
+  left:25rpx;  
+  z-index: 2;  
+  width: 20px;  
+  height: 20px;  
+  text-align: center;  
+}  

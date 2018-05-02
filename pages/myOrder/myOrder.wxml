@@ -1,0 +1,53 @@
+<!--pages/myOrder/myOrder.wxml-->
+<view wx:if="{{isData}}">
+
+
+<view class="page">
+    <view class="page__bd" wx:for="{{orderList}}" wx:for-item="item" wx:key="{{item._id}}">
+        <view class="weui-form-preview">
+            <view class="weui-form-preview__hd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">
+                      <view class="weui-cell__hd">
+                        <image src="{{item.thumbnailUrl}}" style="margin-right: 5px;vertical-align: middle;width:114px; height: 64px;"></image>
+                    </view>
+                    </view>
+                    <view class="weui-form-preview__value_in-hd">
+                      <view class="weui-cell__ft weui-cell__ft_in-access" style='color:#393939;font-size:15px;'>{{item.title}}</view>
+                      <view class="weui-cell__ft">¥{{item.actPrice}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">购买时间</view>
+                    <view class="weui-form-preview__value">{{item.createdAt}}</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">支付方式</view>
+                    <view class="weui-form-preview__value">{{item.tradeType}}支付</view>
+                </view>
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__label">优惠券</view>
+                    <view class="weui-form-preview__value">无</view>
+                </view>
+            </view>
+            <view class='line'></view>
+            <view class="weui-form-preview__bd">
+                <view class="weui-form-preview__item">
+                    <view class="weui-form-preview__value">
+                      <text class='infact-pay'>实付：</text>
+                      <text class='infact-charge'>¥{{item.actPrice}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+</view>
+<view class='text-center' wx:else>
+  <text>暂无任何订单信息</text>
+</view>

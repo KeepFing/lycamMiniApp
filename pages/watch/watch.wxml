@@ -1,0 +1,195 @@
+<import src="../../pages/wxParse/wxParse.wxml" />
+<!--pages/video/video.wxml-->
+<view>
+  <view class="section tc">
+    <view wx:if="{{courseData.isSeries}}">
+      <view wx:if="{{courseData.isSubscribe}}">
+        <video class='video' src="{{courseData.streamUrl}}" page-gesture="true" controls>1</video>
+      </view>
+      <view wx:else>
+        <image class='video' src='{{parentPicUrl}}'>不是系列课</image>
+      </view>
+    </view>
+    <view wx:elif="{{courseData.isSubscribe == false}}">
+      <view wx:if="{{courseData.status == 'ready'}}">
+        <video class='video' wx:if="{{courseData.isFreeWatch == true}}" page-gesture="true" src="{{courseData.streamUrl}}" controls>2</video>
+        <view wx:else>
+          <image class='video' src='{{parentPicUrl}}'>1</image>
+        </view>
+      </view>
+      <view wx:else>
+        <video class='video' page-gesture="true" wx:if="{{courseData.isFreeWatch == true}} || {{courseData.status == 'over'}}" src="{{courseData.streamUrl}}" controls>3</video>
+        <view wx:else>
+          <image class='video' src='{{parentPicUrl}}'>3</image>
+        </view>
+      </view>
+    </view>
+    <view wx:elif="{{courseData.isFreeWatch == true}}">
+      <video class='video' page-gesture="true" src="{{courseData.streamUrl}}" controls>4</video>
+    </view>
+    <view wx:else>
+      <view wx:if="{{courseData.status == 'ready'}}">
+        <text class='status_loding'>预告</text>
+        <image class='video' src='{{parentPicUrl}}'>2</image>
+      </view>
+      <view wx:else>
+        <video class='video' page-gesture="true" src="{{courseData.streamUrl}}" controls>5</video>
+      </view>
+    </view>
+
+  </view>
+  <!-- <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view> -->
+  <!-- <view class='min-space' style='margin-top:5px'></view> -->
+
+
+  <view class='course-title'>
+    <view class='wa-row'>
+      <view class='wa-col-75'>
+        <text>{{courseData.title}}</text>
+      </view>
+      <!-- <view class='wa-col-75'>
+          <text class='submit-name'>立即报名</text>
+        </view> -->
+    </view>
+    <view class='hr'></view>
+    <view class='wa-row'>
+      <view class='wa-col-33 text-center text-derection'>
+        <view>开课时间</view>
+        <view class='text-derection'>{{courseData.startTime}}</view>
+      </view>
+      <view class='wa-col-33 text-center text-derection'>
+        <view>分类</view>
+        <view class='text-derection'>{{courseData.category}}</view>
+      </view>
+      <view class='wa-col-33 text-center text-derection' wx:if="{{isseries}}" data-id='{{courseData.streamId}}' bindtap='handsubmit'>
+        <view>观看人数</view>
+        <view class='text-derection'>{{courseData.watchedCount}}</view>
+      </view>
+      <view class='wa-col-33 text-center text-derection' data-id='{{courseData.streamId}}' wx:else bindtap='handsubmit'> 
+        <view>报名人数</view>
+        <view class='text-derection'>{{courseData.subscribeCount}}</view>
+      </view>
+    </view>
+
+
+  </view>
+
+
+  <view class='min-space' style='margin-top:5px'></view>
+  <view style='margin:20px 10px;'>课程描述：</view>
+  <view style='margin:0px 0px;'>
+    <template is="wxParse" data="{{wxParseData:detail.nodes}}" />
+    <!-- {{courseData.description}} -->
+  </view>
+
+  <view class='wa-row'>
+    <view class='wa-col-33'>
+      <view class='hr'></view>
+    </view>
+    <view class='wa-col-33 text-center' style='color:#393939;'>相关推荐</view>
+    <view class='wa-col-33'>
+      <view class='hr'></view>
+    </view>
+  </view>
+
+
+  <view class="wa-grid">
+    <view wx:for="{{hobbyList}}" wx:for-item="item" wx:key="{{id}}" data-isseries='{{item.isSeries}}' data-streamId="{{item.streamId}}" class="course wa-grid-50" bindtap='courseDetaile'>
+      <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+      <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+      <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+      <text wx:else class='status_reload'>回放</text>
+      <image style="width: 200px; height: 100px; padding:0px 5px; background-color: #eeeeee;" mode="{{mode}}" src="{{item.thumbnailUrl}}"></image>
+
+      <view class="wa-row" style='padding:0px 5px;'>
+        <view wx:if="{{item.isSeries}}" class="wa-col-25 type">系列课</view>
+        <view wx:else></view>
+        <view class="wa-col-75 titel">{{item.title}}</view>
+      </view>
+
+      <view class="wa-row" style='padding:10px 5px;color:#D0D0D0;'>
+        <view class='wa-col-15 person'>
+          <image class='mini-head-image' src='{{item.user.avatarUrl}}'></image>
+        </view>
+        <view class='wa-col-50 person'>{{item.user.displayName}}</view>
+        <view class='wa-col-15'>
+          <image class='mini-eye-image' src='../../image/icon_home_eye@2x.png'></image>
+        </view>
+        <view class='wa-col-20 person'>{{item.watchedCount}}</view>
+      </view>
+
+
+    </view>
+  </view>
+  <view></view>
+  <view wx:if="{{courseData.isSubscribe}}"></view>
+  <view wx:elif="{{!wxMiniPayStatus}}" class='wa-row'>
+    <button type='primary' class='test-button' bindtap='testPay'>
+      <text>报名</text>
+    </button>
+  </view>
+  <view wx:elif="{{issub == true}}"></view>
+  <view class='pay' wx:else>
+    <view wx:if="{{isseries}}">
+      <view class='wa-row' wx:if="{{charge != 0}}">
+        <view>
+          <image class='icon-charge' src='../../image/iocn_bottom_money@2x.png'></image>
+        </view>
+        <text class='wa-col-55 price' decode="{{true}}">&nbsp;&nbsp;¥{{charge}}</text>
+        <button size='mini' type='primary' class='wa-col-25 pay-btn' data-id="{{courseid}}" bindtap='pay'>
+          <text class='confirm'>报名</text>
+        </button>
+      </view>
+      <view class='wa-row' wx:else>
+        <view>
+          <image class='icon-charge' src='../../image/iocn_bottom_charge@2x.png'></image>
+        </view>
+        <text class='wa-col-66 price' decode="{{true}}" style='color:#C6C8D1;'>&nbsp;&nbsp;本课程免费</text>
+        <button size='mini' type='primary' class='wa-col-25 pay-btn' data-id='{{courseData.streamId}}' bindtap='freepay'>
+          <text class='confirm'>报名</text>
+        </button>
+      </view>
+    </view>
+    <view wx:else>
+      <view class='wa-row' wx:if="{{courseData.charge != 0}}">
+        <view>
+          <image class='icon-charge' src='../../image/iocn_bottom_money@2x.png'></image>
+        </view>
+        <text class='wa-col-55 price' decode="{{true}}">&nbsp;&nbsp;¥{{courseData.charge}}</text>
+        <button size='mini' type='primary' class='wa-col-25 pay-btn' data-id="{{courseData.streamId}}" bindtap='pay'>
+          <text class='confirm'>报名</text>
+        </button>
+      </view>
+
+      <view class='wa-row' wx:else>
+        <view>
+          <image class='icon-charge' src='../../image/iocn_bottom_charge@2x.png'></image>
+        </view>
+        <text class='wa-col-66 price' decode="{{true}}" style='color:#C6C8D1;'>&nbsp;&nbsp;本课程免费</text>
+        <button size='mini' type='primary' class='wa-col-25 pay-btn' data-id='{{courseData.streamId}}' bindtap='freepay'>
+          <text class='confirm'>报名</text>
+        </button>
+      </view>
+    </view>
+
+
+  </view>
+</view>
+
+<!-- 
+<!-- 评论区块 -->
+<view hidden="{{currentTab!==0}}">
+  <view class='list-one' wx:for="{{catalog}}" wx:for-item="item" wx:key="{{streamId}}" data-streamId="{{item.streamId}}" bindtap='watchvideo'>
+    <view class='wa-row'>
+      <view>{{index+1}}.{{item.title}}</view>
+    </view>
+    <view class='wa-row sub-des'>
+      <view class='wa-col-50'>时间:{{item.startTime}}</view>
+      <view class='wa-col-33' style='color:gainsboro;'>时长:{{item.duration}}</view>
+    </view>
+    <view class='mini-hr'></view>
+  </view>
+  <!-- <view class='min-space' style='margin-top:5px'></view> -->
+</view>

@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/order/order",
+    "pages/mine/mine",
+    "pages/chioce/chioce",
+    "pages/feedback/feedback",
+    "pages/aboutUs/aboutUs",
+    "pages/myOrder/myOrder",
+    "pages/video/video",
+    "pages/userInfo/userInfo",
+    "pages/feedbackpage/feedbackpage",
+    "pages/enlist/enlist",
+    "pages/watch/watch",
+    "pages/search/search"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FAFAFF",
+    "navigationBarTitleText": "手播课",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "backgroundColor":"#F4F4F4"
+  },
+  "tabBar": {
+    "color": "#393939",
+    "selectedColor": "#393939",
+    "borderStyle": "#D7D7D7",
+    "list": [
+      {
+        "selectedIconPath": "image/button_home_home_pressed.png",
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "image/button_home_home_normal.png"
+      },
+      {
+        "selectedIconPath": "image/button_home_take_pressed.png",
+        "pagePath": "pages/order/order",
+        "text": "订阅",
+        "iconPath": "image/button_home_take_normal.png"
+      },
+      {
+        "selectedIconPath": "image/button_home_user_pressed.png",
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "image/button_home_user_normal.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+<!--pages/search/search.wxml-->
+<view class='page_row'>  
+  <view class="search">  
+    <view class="df search_arr">  
+      <icon class="searchcion" size='20' type='search'></icon>  
+      <input focus='true' placeholder='搜索我感兴趣的内容' confirm-type="search" adjust-position="false" bindconfirm="search" type='text'/>  
+    </view>   
+  </view> 
+     <text class='cancel' bindtap='cancel'>取消</text>
+</view>
+
+<view wx:if="{{searchStatus}}">
+  <view wx:hidden='isHistory'>
+    <view class='history-record'>历史记录</view>
+    <view class='remove-record' bindtap='removeRecord'>清空记录</view>
+  </view>
+  <view class='clear'></view>
+  <view class='history-list'>
+    <view class='history-content' wx:for="{{record}}" wx:key="{{index}}" data-key="{{item}}" bindtap='searchByHistory'>{{item}}</view>
+  </view>
+</view>
+
+<view style='margin-top:10px;'>
+  <view class='wa-row box-border' wx:for="{{searchList}}" wx:for-item="item" wx:key="{{item.id}}" data-isSeries="{{item.isSeries}}" data-streamId="{{item.streamId}}" bindtap='watchvideo'>
+    <view class='wa-col-33'>
+      <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+      <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+      <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+      <text wx:else class='status_reload'>回放</text>
+      <image class='mini-img' src='{{item.thumbnailUrl}}'></image>
+    </view>
+    <view class='wa-col-66'>
+      <view class='wa-row title-hid'>
+        <view wx:if="{{item.isSeries}}" class="type">系列课</view>
+        <view wx:else></view>
+        <view class='title-eclipce'>{{item.title}}</view>
+      </view>
+      <view class='wa-row sub-des'>
+        <view class='wa-col-50 title-eclipce'>{{item.user.displayName}}</view>
+        <view class='wa-col-50'>{{item.startTime}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{nextPageAvailable == true}}" class='more' bindtap='getMoreData'>————加载更多————</view>
+<view wx:elif="{{nextPageAvailable == false}}" class='not-more'>————没有更多内容—————</view>
+<view wx:else></view>
+
+
+
+ 

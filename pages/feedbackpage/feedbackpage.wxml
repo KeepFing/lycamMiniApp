@@ -1,0 +1,14 @@
+<!--pages/feedbackpage/feedbackpage.wxml-->
+<view class='space' style='height:5%'>反馈建议</view>
+  <view class="section" style='height:10%'>
+    <textarea class='wa-textarea' bindinput='bindFeedbackKeyUp' placeholder="请用至少10字描述您的建议或问题反馈，以便我们能够更快的定位您的问题" auto-focus />
+  </view>
+  <view class='space' style='height:5%'>联系方式</view>
+  <input style='height:5%' type='number' bindinput='bindContactKeyUp' class="wa-input" placeholder="邮箱／手机号" value=""/>
+  <view class='btn-bg'>
+    <button class='submitbtn' type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}"
+        disabled="{{disabled}}" bindtap="submitFeedback">提交</button>
+  </view>
+  <view class='space' style='height:55%;width:100%;'>
+   
+  </view>

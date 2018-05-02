@@ -1,0 +1,29 @@
+<!--pages/userInfo/userInfo.wxml-->
+<view class="wa-list">
+    <view class="wa-item wa-item-thumbnail-right font-line-center">
+      <image class="item-img item-headimg" src="{{userInfo.avatarUrl}}"></image>
+      头像
+    </view>
+    <view class="wa-item">
+      <text class="icon-right">{{userInfo.displayName}}</text>
+      昵称
+    </view>
+    <view class="wa-item">
+      <text class="icon-right" wx:if="{{userInfo.gender}}">男</text>
+      <text class="icon-right" wx:elif="{{userInfo.gender}}">女</text>
+      <text class="icon-right" wx:else>保密</text>
+      性别
+    </view>
+    <view class="wa-item">
+      <text class="icon-right"></text>
+      生日
+    </view>
+    <view class="wa-item">
+      <text class="icon-right">{{userInfo.description}}</text>
+      个性签名
+    </view>
+    <!-- <view class="wa-item">
+      <text class="icon-right"></text>
+      认证信息
+    </view> -->
+</view>

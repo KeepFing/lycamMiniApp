@@ -1,0 +1,95 @@
+/* pages/chioce/chioce.wxss */
+.seen{
+  text-align: right
+}
+.jingxuan{
+  margin: 20rpx 0rpx;
+}
+.course{
+  margin: 20rpx 0rpx;
+}
+.status_loding{
+  padding: 0 10px;
+  margin: 0px 10px;
+  position: absolute;
+  color: white;
+  height: 20px;
+  font-weight: 200;
+  font-size: 0.8em;
+  line-height: 20px;
+  background-color: darkturquoise;
+}
+.status_reload{
+  padding: 0 10px;
+  margin: 0px 10px;
+  position: absolute;
+  color: white;
+  height: 20px;
+  font-weight: 200;
+  font-size: 0.8em;
+  line-height: 20px;
+  background-color: grey;
+}
+ .type{
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 300;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #14C864;
+  color: #14C864;
+  margin-right: 5px;
+  padding: 0px 5px;
+} 
+.titel{
+  font-size: 12px;
+  color: #393939;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.person{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 300;
+  color: #AAAAAA;
+}
+.font-center{
+  line-height: 0.8em;
+}
+.head-img{
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  margin-top: -3px;
+  margin-right: 5px;
+}
+.eye-img{
+  width: 15px;
+  height: 15px;
+}
+.mini-head-image {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+}
+
+.mini-person {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 300;
+  color: #aaa;
+  line-height: 20px;
+}
+
+.mini-eye-image {
+  width: 10px;
+  height: 6px;
+  margin-bottom: 2px;
+}

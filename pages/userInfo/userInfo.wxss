@@ -1,0 +1,12 @@
+/* pages/userInfo/userInfo.wxss */
+.font-line-center{
+  display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
+}
+.item-headimg{
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}

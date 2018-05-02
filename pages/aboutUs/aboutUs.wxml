@@ -1,0 +1,14 @@
+<!--pages/aboutUs/aboutUs.wxml-->
+<view class='img-center'>
+<image class='img' src='../../image/logo.jpeg'></image>
+</view>
+<view class='text-center'>手播课</view>
+<view class='text-center'>4.2.6</view>
+<view class='remark'>
+  <view class='text-center text-margin' style='color:red;' bindtap='userAgreement'>用户协议</view>
+  <view class='text-center text-margin'>成都铼看科技有限公司</view>
+  <view class='text-center text-margin'>lycam.tv</view>
+</view>
+
+
+

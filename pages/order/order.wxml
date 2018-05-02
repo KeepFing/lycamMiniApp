@@ -1,0 +1,26 @@
+<!--pages/order/order.wxml-->
+
+<view wx:if="{{isData}}">
+  <view class='wa-row' wx:for="{{orderList}}" wx:for-item="item" wx:key="{{item.id}}" data-isSeries="{{item.isSeries}}" data-streamId="{{item.streamId}}" bindtap='watchvideo'>
+    <view class='wa-col-33'>
+      <text wx:if="{{item.status == 'pending'}}" class='status_loding'>进行中</text>
+      <text wx:elif="{{item.status == 'ready'}}" class='status_loding'>预告</text>
+      <text wx:elif="{{item.status == 'live'}}" class='status_loding' style='background-color: #14C864;'>直播</text>
+        <text wx:else class='status_reload'>回放</text>
+      <image class='mini-img' src='{{item.thumbnailUrl}}'></image>
+    </view>
+    <view class='wa-col-66'>
+      <view class='wa-row title-hid'>{{item.title}}</view>
+      <view class='wa-row sub-des'>
+          <view class='wa-col-10 person'>
+            <image class='mini-head-image' src='{{item.user.avatarUrl}}'></image>
+          </view>
+          <view class='wa-col-40 person'>{{item.user.displayName}}</view>
+          <view class='wa-col-50 person'>{{item.startTime}}</view>
+        </view>
+    </view>
+  </view>
+</view>
+<view class='text-center' wx:else>
+  <text>暂无任何订阅信息</text>
+</view>
